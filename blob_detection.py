@@ -41,6 +41,6 @@ def blobdetection(img_path):
 
     #plt.title(img_path)
     plt.tight_layout()
-    #plt.show()
+    plt.show()
 
     return blobs_doh.shape[0]

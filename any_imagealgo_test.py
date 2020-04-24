@@ -34,13 +34,13 @@ for i in range(LOOP):
     try:
 
         path = clear_dir+clear_images[i]
-        print(path+" Features :"+str(blobdetection(path)))
-        #print(path+" Features :"+str(orb(path)))
+        #print(path+" Features :"+str(blobdetection(path)))
+        print(path+" Features :"+str(orb(path)))
 
 
         path = blur_dir+blur_images[i]
-        print(path + " Features :" + str(blobdetection(path)))
-        #print(path+" Features :"+str(orb(path)))
+        #print(path + " Features :" + str(blobdetection(path)))
+        print(path+" Features :"+str(orb(path)))
 
     except:
         print("error occurred :", sys.exc_info()[1])

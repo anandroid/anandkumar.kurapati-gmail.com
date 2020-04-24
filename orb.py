@@ -10,13 +10,23 @@ import PIL.Image
 
 
 def orb(img_path):
-    img = np.array(PIL.Image.open(img_path).convert('L'))
+    image = PIL.Image.open(img_path).convert('L')
+    img1 = np.array(image)
+    img2 = tf.rotate(img1, 180)
 
     descriptor_extractor = ORB(n_keypoints=200)
 
-    descriptor_extractor.detect_and_extract(img)
+    descriptor_extractor.detect_and_extract(img1)
     keypoints1 = descriptor_extractor.keypoints
     descriptors1 = descriptor_extractor.descriptors
+
+    descriptor_extractor.detect_and_extract(img2)
+    keypoints2 = descriptor_extractor.keypoints
+    descriptors2 = descriptor_extractor.descriptors
+
+    matches12 = match_descriptors(descriptors1, descriptors2, cross_check=True)
+
+
 
 
 
@@ -25,11 +35,13 @@ def orb(img_path):
 
     plt.gray()
 
-    ax[0].imshow(np.array(img))
+    plot_matches(ax[0], img1, img2, keypoints1, keypoints2, matches12)
     ax[0].axis('off')
-    ax[0].set_title("Original Image")
+    ax[0].set_title(img_path)
+
+
     plt.show()
 
-    return keypoints1.shape[0]
+    return matches12.shape[0]
 
 
